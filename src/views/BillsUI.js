@@ -20,7 +20,10 @@ const row = (bill) => {
 }//Ajouter la fonction de téléchargement du PDF?
 
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+  // Trie les bills par date
+  const bills = data.sort((a, b) => new Date(b.date) - new Date(a.date))
+
+  return (bills && bills.length) ? bills.map(bill => row(bill)).join("") : ""
 }
 
 export default ({ data: bills, loading, error }) => {
